@@ -1,1 +1,289 @@
-# srilekhaaaaaaaaaaaaa
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Srilekha 💖</title>
+
+<style>
+
+body{
+margin:0;
+overflow:hidden;
+font-family:Arial, sans-serif;
+background:black;
+color:white;
+text-align:center;
+}
+
+/* star background */
+
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+background:url("https://i.imgur.com/YKY28eT.png");
+animation:starsMove 100s linear infinite;
+}
+
+@keyframes starsMove{
+from{background-position:0 0;}
+to{background-position:-10000px 5000px;}
+}
+
+/* container */
+
+.container{
+position:relative;
+z-index:2;
+margin-top:120px;
+}
+
+/* glowing title */
+
+h1{
+font-size:60px;
+color:#ff66cc;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px pink;}
+to{text-shadow:0 0 40px red;}
+}
+
+p{
+font-size:24px;
+}
+
+/* teddy */
+
+.teddy{
+font-size:90px;
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-20px);}
+}
+
+/* hearts */
+
+.heart{
+position:absolute;
+font-size:25px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);opacity:1;}
+to{transform:translateY(-10vh);opacity:0;}
+}
+
+/* chocolate */
+
+.chocolate{
+position:absolute;
+font-size:25px;
+animation:fall 8s linear infinite;
+}
+
+@keyframes fall{
+from{transform:translateY(-10vh);}
+to{transform:translateY(110vh);}
+}
+
+/* buttons */
+
+button{
+padding:15px 35px;
+margin:20px;
+font-size:22px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+}
+
+#yes{
+background:#ff4da6;
+color:white;
+}
+
+#no{
+background:#555;
+color:white;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<!-- music -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5cfa9e8a1e.mp3?filename=romantic-love-110686.mp3" type="audio/mp3">
+</audio>
+
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+
+<div class="teddy">🧸</div>
+
+<h1>Srilekha 💖</h1>
+
+<p>You are sweeter than chocolates 🍫</p>
+<p>And cuter than this teddy 🧸</p>
+
+<p style="font-size:30px;">Will you go on a date with me? 🌹</p>
+
+<button id="yes" onclick="yesClicked()">YES 💕</button>
+<button id="no" onclick="noClicked()">NO</button>
+
+</div>
+
+<script>
+
+/* YES */
+
+function yesClicked(){
+
+document.body.innerHTML=`
+
+<div style="margin-top:200px;text-align:center;color:white;">
+
+<h1 style="font-size:70px;color:pink;">Yay Srilekha ❤️</h1>
+
+<p style="font-size:30px;">
+You just made me the happiest person today 🌹
+</p>
+
+<p style="font-size:28px;">
+I promise our date will be full of smiles, chocolates and memories 🍫✨
+</p>
+
+<div style="font-size:120px;">🧸💖🍫</div>
+
+</div>
+
+`;
+
+}
+
+/* NO */
+
+function noClicked(){
+
+alert("⚠ SYSTEM ERROR\n\n'NO' is not allowed for someone as beautiful as you 💖");
+
+}
+
+/* floating hearts */
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML="💖";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.fontSize=(20+Math.random()*30)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),6000);
+
+}
+
+setInterval(createHeart,300);
+
+/* chocolate rain */
+
+function createChocolate(){
+
+const choco=document.createElement("div");
+
+choco.className="chocolate";
+
+choco.innerHTML="🍫";
+
+choco.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(choco);
+
+setTimeout(()=>choco.remove(),8000);
+
+}
+
+setInterval(createChocolate,1200);
+
+/* fireworks */
+
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+function firework(){
+
+let x=Math.random()*canvas.width;
+let y=Math.random()*canvas.height/2;
+
+for(let i=0;i<50;i++){
+
+particles.push({
+x:x,
+y:y,
+angle:Math.random()*2*Math.PI,
+speed:Math.random()*5+2,
+life:80
+});
+
+}
+
+}
+
+function animate(){
+
+ctx.fillStyle="rgba(0,0,0,0.2)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+particles.forEach((p,i)=>{
+
+p.x+=Math.cos(p.angle)*p.speed;
+p.y+=Math.sin(p.angle)*p.speed;
+p.life--;
+
+ctx.fillStyle="hsl("+Math.random()*360+",100%,60%)";
+ctx.fillRect(p.x,p.y,3,3);
+
+if(p.life<=0)particles.splice(i,1);
+
+});
+
+requestAnimationFrame(animate);
+
+}
+
+setInterval(firework,1500);
+animate();
+
+</script>
+
+</body>
+</html>
